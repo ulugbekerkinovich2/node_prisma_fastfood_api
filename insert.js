@@ -25,7 +25,7 @@ const createFakeData = async () => {
         for (let i = 0; i < 5; i++) {
             categories.push({
                 name: faker.commerce.department(),
-                photo: faker.image.image.url(),
+                photo: faker.image.imageUrl(),
             });
         }
 
@@ -41,7 +41,7 @@ const createFakeData = async () => {
             const randomCategory = categoriesList[Math.floor(Math.random() * categoriesList.length)];
             products.push({
                 name: faker.commerce.productName(),
-                photo: faker.image.image.url(),
+                photo: faker.image.imageUrl(),
                 price: faker.commerce.price(),
                 categoryId: randomCategory.id,
             });
