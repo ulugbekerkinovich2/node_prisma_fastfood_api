@@ -1,0 +1,19 @@
+const express = require("express");
+const cors = require("cors");
+const fileUpload = require("express-fileupload");
+const authRoute = require("./routes/auth.route");
+const categoryRoute = require("./routes/category.route");
+const productRoute = require("./routes/product.route");
+const app = express();
+
+app.use(express.json());
+app.use(cors());
+app.use(fileUpload());
+
+app.use("/auth", authRoute);
+app.use("/category", categoryRoute);
+app.use("/product", productRoute);
+
+app.listen(3000, () => {
+    console.log("Server started on port 3000");
+})

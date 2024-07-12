@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id       String  @default(dbgenerated("gen_random_uuid()")) @map("id") @db.Uuid
+  username String  @map("username")
+  password String  @map("password")
+  isAdmin  Boolean @default(false)
+
+  @@id([id])
+}
+
+model Category {
+  id    String @default(dbgenerated("gen_random_uuid()")) @map("id") @db.Uuid
+  name  String @map("name")
+  photo String @map("photo")
+
+  products Product[]
+
+  @@id([id])
+}
+
+model Product {
+  id         String   @default(dbgenerated("gen_random_uuid()")) @map("id") @db.Uuid
+  name       String   @map("name")
+  photo      String   @map("photo")
+  price      String      @map("price")
+  categoryId String   @db.Uuid
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  @@id([id])
+}
